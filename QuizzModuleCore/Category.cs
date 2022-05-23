@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace QuizzModuleCore
 {
@@ -35,11 +33,29 @@ namespace QuizzModuleCore
         public void AddQuestion(Question question)
         {
             _questions.Add(question);
+            TotalPoints += 5;
         }
 
         public void DeleteQuestion(Question question)
         {
             _questions.Remove(_questions.FirstOrDefault(x => x.Guid == question.Guid) as Question);
+            TotalPoints -= 5;
+        }
+
+        private int _totalPoints;
+
+        public int TotalPoints
+        {
+            get { return _totalPoints; }
+            set { _totalPoints = value; }
+        }
+
+        private int _earnedPoints;
+
+        public int EarnedPoints
+        {
+            get { return _earnedPoints; }
+            set { _earnedPoints = value; }
         }
 
         public Category(string name)

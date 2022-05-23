@@ -1,18 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using QuizzModuleCore;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
-using QuizzModuleCore;
 
 namespace QuizzModuleWpf
 {
@@ -31,8 +20,13 @@ namespace QuizzModuleWpf
 
         private void addQuestion_Click(object sender, RoutedEventArgs e)
         {
-            Category.AddQuestion(new Question("misha"));
+            Category.AddQuestion(new Question("Enter the question text"));
             lvQuestions.Items.Refresh();
+        }
+
+        private void btnGoBack_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.GoBack();
         }
     }
 }

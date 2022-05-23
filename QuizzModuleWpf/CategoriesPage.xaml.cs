@@ -1,18 +1,9 @@
-﻿using QuizzModuleCore;
-using System;
+﻿using Microsoft.Win32;
+using QuizzModuleCore;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace QuizzModuleWpf
 {
@@ -23,6 +14,8 @@ namespace QuizzModuleWpf
     {
         CategoryService service = new CategoryService();
         public List<Category> Categories { get; set; }
+        PassingTheTestWindow window;
+        PassingTheTestPage page = new PassingTheTestPage();
         public CategoriesPage()
         {
             InitializeComponent();
@@ -55,6 +48,51 @@ namespace QuizzModuleWpf
         {
             if ((tvCategory.SelectedItem as Category).Name != "Empty")
                 NavigationService.Navigate(new CategoriesEditing(tvCategory.SelectedItem as Category));
+        }
+
+        private void count_Click(object sender, RoutedEventArgs e)
+        {
+            service.ConsiderPoints();
+            tvCategory.Items.Refresh();
+        }
+
+        private void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+            service.ConsiderPoints();
+            tvCategory.Items.Refresh();
+            SaveFileDialog fileDialog = new SaveFileDialog
+            {
+                Filter = "Text files(*.txt)|*.txt|All files(*.*)|*.*",
+                CreatePrompt = true,
+                OverwritePrompt = true
+
+            };
+            if (fileDialog.ShowDialog().Value)
+            {
+                MessageBox.Show(fileDialog.FileName);
+                service.Save(fileDialog.FileName);
+            }
+            //service.Save("test");
+        }
+
+        private void Load_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog fileDialog = new OpenFileDialog
+            {
+                Filter = "Text files(*.txt)|*.txt|All files(*.*)|*.*"
+            };
+            if (fileDialog.ShowDialog().Value)
+            {
+                service.Load(fileDialog.FileName);
+            }
+            Categories = service.Categories;
+            tvCategory.ItemsSource = Categories;
+        }
+
+        private void PassTest_Click(object sender, RoutedEventArgs e)
+        {
+            window = new PassingTheTestWindow(page);
+            window.Show();
         }
     }
 }

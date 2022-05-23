@@ -23,15 +23,31 @@
         <TreeView MinWidth="220" Grid.Column="2" Name="tvCategory">
             <TreeView.ItemTemplate>
                 <HierarchicalDataTemplate ItemsSource="{Binding Categories}">
-                    <TextBlock Text="{Binding Name}"/>
+
+                    <StackPanel>
+                        <TextBlock Text="{Binding Name}"/>
+                        <Label>
+                            <Label.Content>
+                                <StackPanel>
+                                    <TextBlock Text="Количество баллов"/>
+                                    <TextBlock Text="{Binding TotalPoints}"/>
+                                </StackPanel>
+                            </Label.Content>
+                        </Label>
+                    </StackPanel>
                 </HierarchicalDataTemplate>
             </TreeView.ItemTemplate>
         </TreeView>
+        <Button Grid.Column="1" Content="Пройти тестирование" x:Name="PassTest" Click="PassTest_Click"/>
         <StackPanel Margin="30 30">
             <Button x:Name="addCategory" Height="50" Content="AddCategory" Click="addCategory_Click" Margin="0 10"/>
             <TextBox x:Name="tbCategoryName" Height="50"/>
             <Button x:Name="deleteCategory" Height="50" Content="deleteCategory" Click="deleteCategory_Click" Margin="0 10"/>
             <Button x:Name="editCategory" Height="50" Content="editCategory" Click="editCategory_Click"/>
+            <Button x:Name="count" Height="50" Content="getCategoryCount" Click="count_Click"  Margin="0 10"/>
+            <Button x:Name="btnSave" Height="50" Content="Save" Click="btnSave_Click"/>
+            <Button x:Name="Load" Height="50" Content="Load" Click="Load_Click" Margin="0 10"/>
+
         </StackPanel>
     </Grid>
 </Page>

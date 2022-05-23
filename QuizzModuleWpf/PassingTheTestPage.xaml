@@ -1,0 +1,78 @@
+﻿<Page x:Class="QuizzModuleWpf.PassingTheTestPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:QuizzModuleWpf"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="PassingTheTestPage"
+      TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+      Background="{DynamicResource MaterialDesignPaper}" SizeChanged="Page_SizeChanged">
+    <Page.Resources>
+        <Style TargetType="GroupBox">
+            
+        </Style>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="29*"/>
+            <ColumnDefinition Width="11*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <TreeView MinWidth="220" Grid.Column="1" Name="tvCategory">
+            <TreeView.ItemTemplate>
+                <HierarchicalDataTemplate ItemsSource="{Binding Categories}">
+                    <StackPanel>
+                        <TextBlock Text="{Binding Name}"/>
+                        <Label>
+                            <Label.Content>
+                                <StackPanel>
+                                    <TextBlock Text="Количество баллов"/>
+                                    <TextBlock Text="{Binding TotalPoints}"/>
+                                    <TextBlock Text="{Binding EarnedPoints}"/>
+                                </StackPanel>
+                            </Label.Content>
+                        </Label>
+                    </StackPanel>
+                </HierarchicalDataTemplate>
+            </TreeView.ItemTemplate>
+        </TreeView>
+        <StackPanel>
+            <ScrollViewer x:Name="svContent">
+                <StackPanel>
+                    <TextBlock Text="{Binding currentCategory.Name}" FontSize="24" HorizontalAlignment="Center" x:Name="lblCtgName" TextWrapping="Wrap"/>
+                    <ListView  ItemsSource="{Binding Questions}" x:Name="lvQuestions" Margin="0 40">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn DisplayMemberBinding="{Binding Text}" Header="Вопросы"/>
+                                <GridViewColumn>
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <GroupBox>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <RadioButton Content="1" Click="RadioButton_Click"/>
+                                                    <RadioButton Content="2" Click="RadioButton_Click"/>
+                                                    <RadioButton Content="3" Click="RadioButton_Click"/>
+                                                    <RadioButton Content="4" Click="RadioButton_Click"/>
+                                                    <RadioButton Content="5" Click="RadioButton_Click"/>
+                                                </StackPanel>
+                                            </GroupBox>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <Button x:Name="getNextQuestion" Content="Сохранить и дальше" Width="300" Click="getNextQuestion_Click"/>
+                    <ProgressBar x:Name="progressTest" VerticalAlignment="Bottom" Height="25" Margin="0 40">
+                    </ProgressBar>
+                    <Button Content="Сформировать отчет" Click="Button_Click"/>
+                </StackPanel>      
+            </ScrollViewer>
+        </StackPanel>
+    </Grid>
+</Page>

@@ -31,7 +31,8 @@
             </ListView.ItemTemplate>
         </ListView>
         <StackPanel Grid.Row="2" Orientation="Horizontal" Grid.ColumnSpan="2" Margin="10 0">
-            <Button x:Name="addQuestion" Content="AddQuestion" Click="addQuestion_Click" />    
+            <Button x:Name="addQuestion" Content="AddQuestion" Click="addQuestion_Click" />
+            <Button x:Name="btnGoBack" Content="Back" Click="btnGoBack_Click"/>
         </StackPanel>
         <StackPanel>
             

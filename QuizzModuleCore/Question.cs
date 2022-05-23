@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace QuizzModuleCore
 {
@@ -13,13 +10,13 @@ namespace QuizzModuleCore
         public Guid Guid
         {
             get { return _guid; }
-            
+
         }
 
 
         private string _text;
 
-        public  string Text
+        public string Text
         {
             get { return _text; }
             set { _text = value; }
@@ -27,23 +24,39 @@ namespace QuizzModuleCore
 
         private List<string> _answers;
 
-        public  List<string> Answers
+        public List<string> Answers
         {
             get { return _answers; }
             set { _answers = value; }
         }
 
-        private List<string> _correctAnswers;
+        private List<string> _correctAnswers = new List<string>();
 
         public List<string> CorrectAnswers
         {
-            get { return _correctAnswers; }
+            get
+            {
+                if (_correctAnswers is null)
+                {
+                    _correctAnswers = new List<string>();
+                }
+                return _correctAnswers;
+            }
             set { _correctAnswers = value; }
         }
 
         public Question(string Text)
         {
             this.Text = Text;
+        }
+
+        public void AddCorrectAnswer(string n)
+        {
+            if (_correctAnswers is null)
+            {
+                _correctAnswers = new List<string>();
+            }
+            CorrectAnswers.Insert(0, n);
         }
 
     }
