@@ -227,7 +227,8 @@ namespace QuizzModuleCore
         }
 
 
-        public void CreateReport()
+        public void CreateReport(string expertName, string teacherName, string categoryName,
+            string teacherSubject)
         {
             decimal sum = 0;
 
@@ -239,8 +240,15 @@ namespace QuizzModuleCore
             Excel.Worksheet worksheet = application.Worksheets.Item[1];
 
             worksheet.Name = "Отчет";
-            int row = 0;
+            int row = 1;
             int col = 1;
+
+            worksheet.Cells[col][row++] = $"ФИО эксперта и его должность: {expertName}";
+            worksheet.Cells[col][row++] = $"ФИО аттестуемого учителя: {teacherName}";
+            worksheet.Cells[col][row++] = $"имеющаяся квалификационная категория аттестуемого учителя: {categoryName}";
+            worksheet.Cells[col][row++] = $"категория, на которую претендует аттестуемый учитель: Следующая";
+            worksheet.Cells[col][row] = $"преподаваемый предмет: {teacherSubject}";
+
             foreach (var c in Categories)
             {
                 row++;
@@ -264,6 +272,8 @@ namespace QuizzModuleCore
             sum = sum / (Categories.Count - 1);
 
             worksheet.Cells[col][row] = "Экспертное заключение:";
+            worksheet.Cells[col][row].Font.Size = 20;
+            worksheet.Cells[col][row].Font.Underline = Excel.XlUnderlineStyle.xlUnderlineStyleSingle;
             worksheet.Cells[col + 1][row] = sum;
 
             row++;

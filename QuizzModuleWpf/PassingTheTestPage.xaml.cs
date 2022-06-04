@@ -10,12 +10,13 @@ namespace QuizzModuleWpf
     /// </summary>
     public partial class PassingTheTestPage : Page
     {
-        CategoryService service = new CategoryService();
+        CategoryService service;
         public List<Category> Categories { get; set; }
         public List<Question> Questions { get; set; }
         public Category currentCategory { get; set; }
-        public PassingTheTestPage()
+        public PassingTheTestPage(CategoryService service)
         {
+            this.service = service;
             InitializeComponent();
             service.Load(@"C:\Users\Salavat\source\repos\QuizzModuleWpf\QuizzModuleWpf\bin\Debug\test.txt");
             Categories = service.Categories;
@@ -63,11 +64,6 @@ namespace QuizzModuleWpf
             {
                 svContent.Height = 1000;
             }
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            service.CreateReport();
         }
     }
 }

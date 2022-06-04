@@ -28,15 +28,6 @@
                 <HierarchicalDataTemplate ItemsSource="{Binding Categories}">
                     <StackPanel>
                         <TextBlock Text="{Binding Name}"/>
-                        <Label>
-                            <Label.Content>
-                                <StackPanel>
-                                    <TextBlock Text="Количество баллов"/>
-                                    <TextBlock Text="{Binding TotalPoints}"/>
-                                    <TextBlock Text="{Binding EarnedPoints}"/>
-                                </StackPanel>
-                            </Label.Content>
-                        </Label>
                     </StackPanel>
                 </HierarchicalDataTemplate>
             </TreeView.ItemTemplate>
@@ -70,7 +61,6 @@
                     <Button x:Name="getNextQuestion" Content="Сохранить и дальше" Width="300" Click="getNextQuestion_Click"/>
                     <ProgressBar x:Name="progressTest" VerticalAlignment="Bottom" Height="25" Margin="0 40">
                     </ProgressBar>
-                    <Button Content="Сформировать отчет" Click="Button_Click"/>
                 </StackPanel>      
             </ScrollViewer>
         </StackPanel>

@@ -12,10 +12,10 @@ namespace QuizzModuleWpf
     /// </summary>
     public partial class CategoriesPage : Page
     {
-        CategoryService service = new CategoryService();
+        static CategoryService service = new CategoryService();
         public List<Category> Categories { get; set; }
         PassingTheTestWindow window;
-        PassingTheTestPage page = new PassingTheTestPage();
+        PassingTheTestPage page = new PassingTheTestPage(service);
         public CategoriesPage()
         {
             InitializeComponent();
